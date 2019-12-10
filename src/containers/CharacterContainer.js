@@ -30,40 +30,72 @@ class CharacterContainer extends React.Component {
     this.setState({currentCharacter: selectedCharacter})
   }
 
-  handleHouseSelected(index) {
-    let selectedHouse = null;
-    if(index == 1)
-    {
-      return;
-    }
-    else if (index == 2)
-    {
-      selectedHouse = "";
-    }
-    else if (index == 3)
-    {
-      selectedHouse = "Gryffindor";
-    }
-    else if (index == 4)
-    {
-      selectedHouse = "Slytherin";
-    }
-    else if (index == 5)
-    {
-      selectedHouse = "Hufflepuff";
-    }
-    else
-    {
-      selectedHouse = "Ravenclaw";
-    }
-    const filterCharacters = this.state.characters.map((character) => {
-      if(character.house == selectedHouse){
-        return character;
-      }
-    }
-  )
-  console.log(filterCharacters);
-  // this.setState({characters: filterCharacters})
+//   handleHouseSelected(index) {
+//     let selectedHouse = null;
+//     if(index == 1)
+//     {
+//       return;
+//     }
+//     else if (index == 2)
+//     {
+//       selectedHouse = "";
+//     }
+//     else if (index == 3)
+//     {
+//       selectedHouse = "Gryffindor";
+//     }
+//     else if (index == 4)
+//     {
+//       selectedHouse = "Slytherin";
+//     }
+//     else if (index == 5)
+//     {
+//       selectedHouse = "Hufflepuff";
+//     }
+//     else
+//     {
+//       selectedHouse = "Ravenclaw";
+//     }
+//     const filterCharacters = this.state.characters.map((character) => {
+//       if(character.house == selectedHouse){
+//         return character;
+//       }
+//     }
+//   )
+//   console.log(filterCharacters);
+//   // this.setState({characters: filterCharacters})
+// }
+
+handleHouseSelected(index) {
+  let selectedUrl = "https://hp-api.herokuapp.com/api/characters";
+  if(index == 1)
+  {
+    return;
+  }
+  else if (index == 2)
+  {
+    return;
+  }
+  else if (index == 3)
+  {
+    selectedUrl = "https://hp-api.herokuapp.com/api/characters/house/gryffindor";
+  }
+  else if (index == 4)
+  {
+    selectedUrl = "https://hp-api.herokuapp.com/api/characters/house/slytherin";
+  }
+  else if (index == 5)
+  {
+    selectedUrl = "https://hp-api.herokuapp.com/api/characters/house/hufflepuff";
+  }
+  else
+  {
+    selectedUrl = "https://hp-api.herokuapp.com/api/characters/house/ravenclaw";
+  }
+  fetch(selectedUrl)
+  .then(res => res.json())
+  .then(characters => this.setState({characters: characters}))
+  .catch(err => console.error);
 }
 
 render(){
